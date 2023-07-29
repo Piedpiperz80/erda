@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feb337943ca05e4f8258a9a179b881a, type: 3}
+  m_Name: Setting 1
+  m_EditorClassIdentifier: 
+  storyText: 'The sky is thick with stars, sparse clouds dotting the inky black canvas
+    like lost souls in the night searching for a way home. A crescent moon hangs
+    low on the horizon, big and orange as a winter pumpkin. You''re walking down
+    a dirt path that winds through tall grass, wheat fields rustling in the breeze
+    to either side of you. '
+  nextStoryBlock:
+  - {fileID: 11400000, guid: 7ffb0529aa9e9424eb607c44b3ff8934, type: 2}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feb337943ca05e4f8258a9a179b881a, type: 3}
+  m_Name: Introduction 1
+  m_EditorClassIdentifier: 
+  storyText: '1) Lady''s hands as strong as they are beautiful but gentle enough
+    to caress a baby''s face. I have the hands of a woman who knew how to work hard
+    and how to love.
+
+
+    2) Man''s hands to protect what is most important to him.
+    To keep his loved ones safe and sound, and will do whatever it takes to make
+    sure they are always out of harm''s way.'
+  nextStoryBlock:
+  - {fileID: 11400000, guid: 39ab38d4751d7a549b30dda9d50ac203, type: 2}
+  - {fileID: 11400000, guid: 39ab38d4751d7a549b30dda9d50ac203, type: 2}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feb337943ca05e4f8258a9a179b881a, type: 3}
+  m_Name: Introduction 0
+  m_EditorClassIdentifier: 
+  storyText: "You sway unsteadily on all fours, your hands held out before you as
+    you try to focus on them in the moonlight. Your vision swims and blurs, making
+    it hard to make out any details. All you can see is that your hands are\u2026\n\n1)
+    large, the fingers thick and the nails hard.\r\n2) small and delicate with soft
+    nails."
+  nextStoryBlock:
+  - {fileID: 11400000, guid: 8a393860aa7a2fe41a1065f9835a2d6d, type: 2}
+  - {fileID: 11400000, guid: 67dbc825f9a25984d975b6063216ef74, type: 2}

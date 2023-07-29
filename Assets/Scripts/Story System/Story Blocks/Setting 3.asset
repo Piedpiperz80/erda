@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feb337943ca05e4f8258a9a179b881a, type: 3}
+  m_Name: Setting 3
+  m_EditorClassIdentifier: 
+  storyText: It feels confusing and frightening not to know who you are or where
+    you have come from. You feel like a lost child wandering in the dark, with no
+    idea how to find your way home. Every step feels like it could be leading you
+    further away from anything familiar and safe. Your mind is filled with questions
+    - Who am I? What happened to me? Where am I supposed to go now? - but there are
+    no answers forthcoming. All you can do is keep moving forward, hoping that eventually
+    something will make sense again.
+  nextStoryBlock:
+  - {fileID: 0}
