@@ -21,3 +21,5 @@
 10. **Next Steps**: We discussed the next steps in the game development process, including further fleshing out the GDD, creating more characters, and designing the player creation mechanics and combat system.
 
 You can find the detailed game plan [here](https://github.com/Piedpiperz80/game_plan/blob/main/game_plan.html).
+
+11. **Made a new remote repo that links to the local repo which is tracking the working files in the C:\Text Based Adventure\ folder
