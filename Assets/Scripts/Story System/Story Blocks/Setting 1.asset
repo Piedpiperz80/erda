@@ -17,5 +17,5 @@ MonoBehaviour:
     low on the horizon, big and orange as a winter pumpkin. You''re walking down
     a dirt path that winds through tall grass, wheat fields rustling in the breeze
     to either side of you. '
-  nextStoryBlock:
+  nextStoryBlocks:
   - {fileID: 11400000, guid: 7ffb0529aa9e9424eb607c44b3ff8934, type: 2}

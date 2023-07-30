@@ -19,5 +19,5 @@ MonoBehaviour:
     - Who am I? What happened to me? Where am I supposed to go now? - but there are
     no answers forthcoming. All you can do is keep moving forward, hoping that eventually
     something will make sense again.
-  nextStoryBlock:
-  - {fileID: 0}
+  nextStoryBlocks:
+  - {fileID: 11400000, guid: fd0f1c7e8dc2cc545996a8e5dd6340d4, type: 2}

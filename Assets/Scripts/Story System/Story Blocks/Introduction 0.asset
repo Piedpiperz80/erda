@@ -17,6 +17,6 @@ MonoBehaviour:
     it hard to make out any details. All you can see is that your hands are\u2026\n\n1)
     large, the fingers thick and the nails hard.\r\n2) small and delicate with soft
     nails."
-  nextStoryBlock:
+  nextStoryBlocks:
   - {fileID: 11400000, guid: 8a393860aa7a2fe41a1065f9835a2d6d, type: 2}
   - {fileID: 11400000, guid: 67dbc825f9a25984d975b6063216ef74, type: 2}

@@ -26,12 +26,12 @@ public class StoryManager
 
     public int GetNextStoryBlockCount()
     {
-        return currentStoryBlock.GetNextStoryBlock().Length;
+        return currentStoryBlock.GetNextStoryBlockCount();
     }
 
     public void MoveToNextStoryBlock(int index)
     {
-        StoryBlock[] nextBlocks = currentStoryBlock.GetNextStoryBlock();
+        StoryBlock[] nextBlocks = currentStoryBlock.GetAllNextStoryBlocks();
 
         if (index < 0 || index >= nextBlocks.Length)
         {
@@ -42,5 +42,10 @@ public class StoryManager
         storyHistory.Add(currentStoryBlock);
         currentStoryBlock = nextBlocks[index];
         currentStoryText = currentStoryBlock.GetStoryText();
+    }
+
+    public StoryBlock GetCurrentStoryBlock()
+    {
+        return currentStoryBlock;
     }
 }

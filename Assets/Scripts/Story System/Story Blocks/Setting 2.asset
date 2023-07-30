@@ -17,5 +17,5 @@ MonoBehaviour:
     no sign of any people moving about; doors shut tight against night''s chill threats.
     Not even dogs bark as you approach cautiously from behind a line of wagon wheels
     propped up near what must be the main entrance to town.. '
-  nextStoryBlock:
+  nextStoryBlocks:
   - {fileID: 11400000, guid: 31348ba7c303774478719bd4dbd27689, type: 2}

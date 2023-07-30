@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2feb337943ca05e4f8258a9a179b881a, type: 3}
-  m_Name: Introduction 2
+  m_Name: Setting 4
   m_EditorClassIdentifier: 
-  storyText: '1) He had a gentle touch, one that could soothe the most broken of
-    hearts...
+  storyText: 'You suddenly hear a rustling in the undergrowth. Turning your head,
+    you squint into the darkness. The rustling grows louder and closer. Suddenly,
+    a creature leaps out at you, its eyes glinting in the moonlight. You have no
+    choice but to fight!
 
-
-    2) Her hands were soft and gentle as they caressed my face...'
-  nextStoryBlocks:
-  - {fileID: 11400000, guid: 39ab38d4751d7a549b30dda9d50ac203, type: 2}
+'
+  nextStoryBlocks: []
