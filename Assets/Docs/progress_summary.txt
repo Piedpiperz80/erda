@@ -1,0 +1,17 @@
+
+## Progress Summary
+
+1. **Story System**: The story system has been refined to include different types of `StoryBlocks`. These `StoryBlocks` now support multiple paths, AI interactions, and transitions to a combat scene.
+
+2. **Combat Scene Transition**: A `SceneLoader` singleton has been created to manage scene transitions. `StoryBlocks` can now trigger a combat scene through the `SceneLoader`.
+
+3. **Combat Scene**: Preliminary discussion about integrating the story system with the combat system. The idea is to return to the story scene when combat ends, with a `StoryBlock` summarizing the aftermath of combat.
+
+4. **Next Steps**: The integration of the combat system with the story system needs to be implemented. The combat code needs to be reviewed to understand the current implementation and how best to integrate it with the story system. A mechanism to return to the story scene after combat ends, using a specific `StoryBlock` to summarize the aftermath of combat, needs to be implemented.
+
+5. **Git Commands Used**:
+cd c:\Text Based Adventure
+    - To check the status of the repository: `git status`
+    - To add changes to the staging area: `git add .`
+    - To commit changes: `git commit -m "commit message"`
+    - To push changes to the remote repository: `git push origin master`
