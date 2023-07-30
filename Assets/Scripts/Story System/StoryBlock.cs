@@ -7,6 +7,7 @@ public class StoryBlock : ScriptableObject
     [SerializeField] string storyText;
     [SerializeField] StoryBlock[] nextStoryBlocks;
     [SerializeField] bool requiresAIInteraction;  // New field
+    [SerializeField] bool isCombatTrigger; // New variable
 
     public string GetStoryText()
     {
@@ -31,5 +32,10 @@ public class StoryBlock : ScriptableObject
     public bool RequiresAIInteraction()  // New method
     {
         return requiresAIInteraction;
+    }
+
+    public bool GetIsCombatTrigger() // New method
+    {
+        return isCombatTrigger;
     }
 }

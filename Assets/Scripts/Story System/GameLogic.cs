@@ -43,7 +43,14 @@ public class GameLogic : MonoBehaviour
 
     private void UpdateStory()
     {
-        gameText.text = storyManager.GetCurrentStoryText();
+        string storyText = storyManager.GetCurrentStoryText();
+        if (storyText == null)
+        {
+            Debug.LogError("Current story text is null. Please check your StoryBlock objects.");
+            return;
+        }
+
+        gameText.text = storyText;
 
         if (storyManager.GetNextStoryBlockCount() == 0 || (storyManager.GetNextStoryBlockCount() == 1 && !storyManager.GetCurrentStoryBlock().RequiresAIInteraction()))
         {
@@ -56,6 +63,13 @@ public class GameLogic : MonoBehaviour
         else
         {
             userInputManager.SetInputFieldPlaceholder("Please input your next action...");
+        }
+
+        // New condition to check if the current block should trigger combat scene
+        if (storyManager.GetCurrentStoryBlock().GetIsCombatTrigger())
+        {
+            SceneLoader.Instance.LoadScene("CombatScene");
+            // Save game state here before transitioning to combat scene
         }
     }
 

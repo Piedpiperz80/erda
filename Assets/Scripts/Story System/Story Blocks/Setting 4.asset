@@ -19,3 +19,5 @@ MonoBehaviour:
 
 '
   nextStoryBlocks: []
+  requiresAIInteraction: 0
+  isCombatTrigger: 1
