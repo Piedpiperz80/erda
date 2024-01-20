@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class GameLogic : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameLogic : MonoBehaviour
     private ChatbotManager chatbotManager = new ChatbotManager();
     private StoryManager storyManager;
     private UserInputManager userInputManager;
+    private bool readyForCombat = false;
 
     private void Start()
     {
@@ -25,30 +27,67 @@ public class GameLogic : MonoBehaviour
 
     private void Update()
     {
-        // If the current StoryBlock is a "press any key to continue" block and the user has pressed any key,
-        // move to the next StoryBlock
-        if (storyManager.GetCurrentStoryBlock().RequiresAIInteraction() && Input.anyKeyDown)
+        Debug.Log("[Update] Method called");
+
+        // Check if the current block is a combat trigger and set readyForCombat accordingly
+        if (storyManager.GetCurrentStoryBlock().GetIsCombatTrigger() && !readyForCombat)
         {
-            if (storyManager.GetNextStoryBlockCount() > 0)  // Added this check
+            Debug.Log("[Update] Combat trigger block identified, setting readyForCombat to true");
+            readyForCombat = true;
+            userInputManager.SetInputFieldPlaceholder("Press any key to continue..."); // Prompt the user to press a key
+            return; // Return here to avoid immediately loading the combat scene
+        }
+
+        // Load combat scene only after a key press when readyForCombat is true
+        if (readyForCombat && Input.anyKeyDown)
+        {
+            Debug.Log("[Update] Combat trigger detected, loading combat scene");
+            SceneLoader.Instance.LoadScene("CombatScene");
+            readyForCombat = false; // Reset the flag
+            return; // Return here to prevent further processing in Update
+        }
+
+        // Handling other key presses for AI interaction and story progression
+        if (Input.anyKeyDown)
+        {
+            Debug.Log("[Update] A key was pressed");
+
+            // Check if the current story block requires AI interaction
+            if (storyManager.GetCurrentStoryBlock().RequiresAIInteraction())
             {
-                storyManager.MoveToNextStoryBlock(0);
-                UpdateStory();
+                Debug.Log("[Update] Current block requires AI Interaction");
+                if (storyManager.GetNextStoryBlockCount() > 0)
+                {
+                    Debug.Log("[Update] Moving to next story block");
+                    storyManager.MoveToNextStoryBlock(0);
+                    UpdateStory();
+                }
+                else
+                {
+                    Debug.Log("[Update] No next story block");
+                }
             }
             else
             {
-                // Handle the scenario when there's no next StoryBlock
+                Debug.Log("[Update] Current block is neither AI Interaction nor Combat Trigger");
             }
         }
     }
 
+
     private void UpdateStory()
     {
+        Debug.Log("[UpdateStory] Method called");
+
         string storyText = storyManager.GetCurrentStoryText();
         if (storyText == null)
         {
-            Debug.LogError("Current story text is null. Please check your StoryBlock objects.");
+            Debug.LogError("[UpdateStory] Current story text is null. Please check your StoryBlock objects.");
             return;
         }
+
+        Debug.Log($"[UpdateStory] Current Story Text: {storyText}");
+        Debug.Log($"[UpdateStory] Is Current Block a Combat Trigger? {storyManager.GetCurrentStoryBlock().GetIsCombatTrigger()}");
 
         gameText.text = storyText;
 
@@ -65,76 +104,92 @@ public class GameLogic : MonoBehaviour
             userInputManager.SetInputFieldPlaceholder("Please input your next action...");
         }
 
-        // New condition to check if the current block should trigger combat scene
-        if (storyManager.GetCurrentStoryBlock().GetIsCombatTrigger())
-        {
-            SceneLoader.Instance.LoadScene("CombatScene");
-            // Save game state here before transitioning to combat scene
-        }
+        readyForCombat = false; // Reset the flag whenever the story updates
     }
 
     private async void OnUserInputEndEdit(string value)
     {
+        Debug.Log("[OnUserInputEndEdit] Method called");
         userInputManager.SetUserInput(""); // Clear input field
 
-        if (storyManager.GetNextStoryBlockCount() == 0 || (storyManager.GetNextStoryBlockCount() == 1 && !storyManager.GetCurrentStoryBlock().RequiresAIInteraction()))
+        // Check for combat trigger
+        if (storyManager.GetCurrentStoryBlock().GetIsCombatTrigger())
         {
-            // If the story manager has no next blocks, simply move to the next one without any user input processing
-            if (storyManager.GetNextStoryBlockCount() > 0)
-            {
-                storyManager.MoveToNextStoryBlock(0);
-                UpdateStory();
-            }
+            Debug.Log("[OnUserInputEndEdit] Handling combat trigger");
+            HandleCombatTrigger();
+            return;
+        }
 
-            userInputManager.ResetAndActivateInputField();
+        // Check for AI interaction
+        if (storyManager.GetCurrentStoryBlock().RequiresAIInteraction())
+        {
+            Debug.Log("[OnUserInputEndEdit] Processing AI interaction");
+            await HandleAIInteraction(value);
+            return;
+        }
+
+        // Check for multiple choices
+        if (storyManager.GetNextStoryBlockCount() > 1)
+        {
+            Debug.Log("[OnUserInputEndEdit] Handling multiple choice input");
+            HandleMultipleChoice(value);
+            return;
+        }
+
+        // Default action for moving to the next story block
+        Debug.Log("[OnUserInputEndEdit] Moving to next story block");
+        MoveToNextStoryBlock();
+    }
+
+    private void HandleCombatTrigger()
+    {
+        // Logic to handle combat trigger
+        SceneLoader.Instance.LoadScene("CombatScene");
+    }
+
+    private async Task HandleAIInteraction(string userInput)
+    {
+        processingAnimation = StartCoroutine(ProcessingAnimation());
+        string completion = await chatbotManager.SendRequestToChatbot(storyManager.GetCurrentStoryText(), userInput);
+        StopCoroutine(processingAnimation);
+        storyManager.SetCurrentStoryText(completion);
+        UpdateStory();
+        userInputManager.ResetAndActivateInputField();
+    }
+
+    private void HandleMultipleChoice(string userInput)
+    {
+        int choice;
+        if (int.TryParse(userInput, out choice) && choice > 0 && choice <= storyManager.GetNextStoryBlockCount())
+        {
+            storyManager.MoveToNextStoryBlock(choice - 1);
+            UpdateStory();
         }
         else
         {
-            if (storyManager.GetNextStoryBlockCount() > 1) // In a choice block
-            {
-                int choice;
-
-                if (int.TryParse(value, out choice) && choice > 0 && choice <= storyManager.GetNextStoryBlockCount())
-                {
-                    // Subtract 1 from choice to make it 0-based
-                    storyManager.MoveToNextStoryBlock(choice - 1);
-                    UpdateStory();
-                }
-                else
-                {
-                    Debug.LogWarning("Invalid user input.");
-                }
-
-                userInputManager.ResetAndActivateInputField();
-            }
-            else // In an AI block
-            {
-                processingAnimation = StartCoroutine(ProcessingAnimation());
-
-                string completion = await chatbotManager.SendRequestToChatbot(storyManager.GetCurrentStoryText(), value);
-                StopCoroutine(processingAnimation);
-                if (storyManager.GetNextStoryBlockCount() > 0)
-                {
-                    storyManager.MoveToNextStoryBlock(0);
-                }
-                else
-                {
-                    // Handle the scenario when there's no next StoryBlock
-                }
-                storyManager.SetCurrentStoryText(completion);
-                UpdateStory();
-
-                userInputManager.ResetAndActivateInputField();
-            }
+            Debug.LogWarning("[HandleMultipleChoice] Invalid user input.");
         }
+        userInputManager.ResetAndActivateInputField();
+    }
+
+    private void MoveToNextStoryBlock()
+    {
+        if (storyManager.GetNextStoryBlockCount() > 0)
+        {
+            storyManager.MoveToNextStoryBlock(0);
+            UpdateStory();
+        }
+        userInputManager.ResetAndActivateInputField();
     }
 
     private IEnumerator ProcessingAnimation()
     {
+        Debug.Log("[ProcessingAnimation] Coroutine started");
         while (true)
         {
             gameText.text += ".";
             yield return new WaitForSeconds(1.0f);
         }
     }
+
 }
