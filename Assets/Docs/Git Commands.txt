@@ -1,10 +1,10 @@
-
-5. **Git Commands Used**:
+**Git Commands Used**:
 cd c:\Text Based Adventure
-    - To check the status of the repository: `git status`
-    - To add changes to the staging area: `git add .`
-    - To commit changes: `git commit -m "commit message"`
-    - To push changes to the remote repository: `git push origin master`
-	- git reset --hard origin/back-to-story-after-combat && git clean -fd
-		Where 'back-to-story-after-combat' is the branch
+	- To check the status of the repository: `git status`
+	- To add changes to the staging area: `git add .`
+	- To commit changes: `git commit -m "commit message"`
+	- To push changes to the remote repository: `git push origin master`
+			Where 'master' is the branch
+	- To reset changes: git reset --hard origin/back-to-story-after-combat && git clean -fd
+			Where 'back-to-story-after-combat' is the branch
 
