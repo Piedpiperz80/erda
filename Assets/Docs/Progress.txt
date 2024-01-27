@@ -15,3 +15,5 @@ cd c:\Text Based Adventure
     - To add changes to the staging area: `git add .`
     - To commit changes: `git commit -m "commit message"`
     - To push changes to the remote repository: `git push origin master`
+	- git reset --hard origin/back-to-story-after-combat && git clean -fd
+

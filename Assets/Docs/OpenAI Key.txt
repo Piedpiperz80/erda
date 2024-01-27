@@ -1,0 +1,3 @@
+C:\Users\Main\.openai\auth.json
+
+Need to implement a UI in the game for setting up OpenAI API key
