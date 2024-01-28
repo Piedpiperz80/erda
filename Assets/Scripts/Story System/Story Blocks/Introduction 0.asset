@@ -20,3 +20,5 @@ MonoBehaviour:
   nextStoryBlocks:
   - {fileID: 11400000, guid: 8a393860aa7a2fe41a1065f9835a2d6d, type: 2}
   - {fileID: 11400000, guid: 67dbc825f9a25984d975b6063216ef74, type: 2}
+  requiresAIInteraction: 1
+  isCombatTrigger: 0

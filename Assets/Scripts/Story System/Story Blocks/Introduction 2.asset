@@ -19,3 +19,5 @@ MonoBehaviour:
     2) Her hands were soft and gentle as they caressed my face...'
   nextStoryBlocks:
   - {fileID: 11400000, guid: 39ab38d4751d7a549b30dda9d50ac203, type: 2}
+  requiresAIInteraction: 1
+  isCombatTrigger: 0

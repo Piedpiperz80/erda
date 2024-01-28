@@ -19,3 +19,5 @@ MonoBehaviour:
     to either side of you. '
   nextStoryBlocks:
   - {fileID: 11400000, guid: 7ffb0529aa9e9424eb607c44b3ff8934, type: 2}
+  requiresAIInteraction: 1
+  isCombatTrigger: 0

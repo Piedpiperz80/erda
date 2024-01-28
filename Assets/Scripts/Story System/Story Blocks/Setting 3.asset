@@ -21,3 +21,5 @@ MonoBehaviour:
     something will make sense again.
   nextStoryBlocks:
   - {fileID: 11400000, guid: fd0f1c7e8dc2cc545996a8e5dd6340d4, type: 2}
+  requiresAIInteraction: 1
+  isCombatTrigger: 0
