@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
+using System.IO;
 
 public class ErdaTime : MonoBehaviour
 {
@@ -9,14 +12,24 @@ public class ErdaTime : MonoBehaviour
     public ErdaDay erdaDay;
     public ErdaMonth erdaMonth;
     public ErdaSeason erdaSeason;
-
+    [SerializeField]
+    private int currentYear = 1; // Serialized private field with initial value 1.
+    public int CurrentYear { get { return currentYear; } private set { currentYear = value; } }
     public float SpeedMultiplier = 1.0f; // Speed of time flow
 
     void Awake()
     {
-        erdaSeason = new ErdaSeason();
+        // Load data for months and seasons from JSON
+        var monthData = LoadDataFromJson<List<MonthData>>("Assets/Resources/Months.json");
+        var seasonData = LoadDataFromJson<List<SeasonData>>("Assets/Resources/Seasons.json");
+
+        erdaSeason = new ErdaSeason(); // Initialize ErdaSeason first
+        erdaMonth = new ErdaMonth(erdaSeason); // Then initialize ErdaMonth with ErdaSeason
         erdaDay = new ErdaDay();
-        erdaMonth = new ErdaMonth(erdaSeason);
+
+        // Set the initial season based on the starting month
+        erdaSeason.UpdateSeason(erdaMonth.GetCurrentMonthName());
+
         Debug.Log("ErdaTime initialized.");
     }
 
@@ -48,14 +61,42 @@ public class ErdaTime : MonoBehaviour
                 {
                     hours = 0;
                     erdaDay.AdvanceDay(); // Advance to the next day
-                    erdaMonth.AdvanceDay(); // Also advance the day in ErdaMonth
+
+                    // New day has started, log the current date
+                    Debug.Log("New Day: " + GetCurrentDate());
+
+                    if (erdaMonth.AdvanceDay()) // Advance the day in ErdaMonth, check if month changed
+                    {
+                        if (erdaMonth.IsStartOfYear()) // Check if it's the start of the year
+                        {
+                            CurrentYear++; // Increment the year
+                        }
+                    }
+
+                    // Here, you can also check and update the season if needed
+                    erdaSeason.UpdateSeason(erdaMonth.GetCurrentMonthName());
                 }
             }
         }
     }
 
+    public string GetCurrentDate()
+    {
+        string currentDayName = erdaDay.GetCurrentDayName();
+        int currentDayNumber = erdaMonth.GetCurrentDayNumber();
+        string currentMonthName = erdaMonth.GetCurrentMonthName();
+        string currentSeasonName = erdaSeason.GetCurrentSeasonName();
+        return $"{currentDayName}, Day {currentDayNumber} of {currentMonthName}, {currentSeasonName}, Year {CurrentYear}";
+    }
+
     public string GetCurrentTime()
     {
         return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+    }
+
+    private T LoadDataFromJson<T>(string jsonPath)
+    {
+        string json = File.ReadAllText(jsonPath);
+        return JsonConvert.DeserializeObject<T>(json);
     }
 }

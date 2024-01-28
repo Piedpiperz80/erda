@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "Frostwake",
+        "Months": ["Noctilis", "Solstice", "Glacialum"]
+    },
+    {
+        "Name": "Bloomrise",
+        "Months": ["Umbrilis", "Aetheril", "Lunistice"]
+    },
+    {
+        "Name": "Suncrest",
+        "Months": ["Nycturnis", "Solaris", "Wyrth"]
+    },
+    {
+        "Name": "Harvestmoon",
+        "Months": ["Zephyril", "Hesperil", "Emberis"]
+    }
+]

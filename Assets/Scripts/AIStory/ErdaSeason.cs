@@ -1,46 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum Season
-{
-    Frostwake, Bloomrise, Suncrest, Harvestmoon
-}
+using Newtonsoft.Json;
+using System.IO;
 
 public class ErdaSeason
 {
-    public Season CurrentSeason { get; private set; }
+    public string CurrentSeason { get; private set; }
 
-    private readonly Dictionary<Month, Season> monthToSeasonMapping;
+    private Dictionary<string, string> monthToSeasonMapping; // Mapping of month names to season names
 
     public ErdaSeason()
     {
-        monthToSeasonMapping = new Dictionary<Month, Season>
-        {
-            { Month.Noctilis, Season.Frostwake },
-            { Month.Solstice, Season.Frostwake },
-            { Month.Glacialum, Season.Frostwake },
-            { Month.Umbrilis, Season.Bloomrise },
-            { Month.Aetheril, Season.Bloomrise },
-            { Month.Lunistice, Season.Bloomrise },
-            { Month.Nycturnis, Season.Suncrest },
-            { Month.Solaris, Season.Suncrest },
-            { Month.Wyrth, Season.Suncrest },
-            { Month.Zephyril, Season.Harvestmoon },
-            { Month.Hesperil, Season.Harvestmoon },
-            { Month.Emberis, Season.Harvestmoon }
-        };
+        monthToSeasonMapping = new Dictionary<string, string>();
+        LoadSeasonData(); // Load season data from JSON
     }
-    public void UpdateSeason(Month currentMonth)
+
+    private void LoadSeasonData()
+    {
+        string json = File.ReadAllText("Assets/Resources/Seasons.json"); // Adjust the path as needed
+        var seasonsData = JsonConvert.DeserializeObject<List<SeasonData>>(json);
+
+        foreach (var season in seasonsData)
+        {
+            foreach (var month in season.Months)
+            {
+                monthToSeasonMapping[month] = season.Name;
+            }
+        }
+    }
+
+    public void UpdateSeason(string currentMonth)
     {
         if (monthToSeasonMapping.ContainsKey(currentMonth))
         {
             CurrentSeason = monthToSeasonMapping[currentMonth];
-            Debug.Log("Season changed to: " + CurrentSeason);
         }
     }
 
     public string GetCurrentSeasonName()
     {
-        return CurrentSeason.ToString();
+        return CurrentSeason;
     }
 }

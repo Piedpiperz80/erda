@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Noctilis",
+        "description": "Deep Frostwake nights envelop the world in darkness, aligning with the cold and harshness of Frostwake.",
+        "days": 30
+    },
+    {
+        "name": "Solstice",
+        "description": "The turning point of Frostwake, marking the shortest day and the longest night of the year.",
+        "days": 30
+    },
+    {
+        "name": "Glacialum",
+        "description": "Signifies the end of Frostwake's coldness, with the frost beginning to recede as the world prepares for Bloomrise.",
+        "days": 30
+    },
+    {
+        "name": "Umbrilis",
+        "description": "Embodies early Bloomrise, where shadows lengthen and the secrets hidden in darkness become more pronounced.",
+        "days": 30
+    },
+    {
+        "name": "Aetheril",
+        "description": "Associated with the ethereal realm and the thinning of the veil between the mortal world and the realm of spirits.",
+        "days": 30
+    },
+    {
+        "name": "Lunistice",
+        "description": "Symbolizes the month of celestial harmony with the strongest influence of the moon, awakening life and enchantment.",
+        "days": 32
+    },
+    {
+        "name": "Nycturnis",
+        "description": "Encompasses the first days of Suncrest with shorter nights and enchanting moonlit landscapes.",
+        "days": 31
+    },
+    {
+        "name": "Solaris",
+        "description": "Signifies the peak of Suncrest with the sun at its most fiery, bringing warmth, light, and vibrant energy.",
+        "days": 31
+    },
+    {
+        "name": "Wyrth",
+        "description": "A period of change and magical energy surge, representing the vitality and spirit of Suncrest.",
+        "days": 31
+    },
+    {
+        "name": "Zephyril",
+        "description": "Marks the transitional phase between Suncrest and Harvestmoon with gentle breezes and ancient whispers.",
+        "days": 30
+    },
+    {
+        "name": "Hesperil",
+        "description": "Draws its name from the twilight hour, inviting reflection on the passage of time in the serene ambiance of late Harvestmoon.",
+        "days": 30
+    },
+    {
+        "name": "Emberis",
+        "description": "Marks the end of Harvestmoon, with the fading embers of warmth and light, preparing for the coming Frostwake.",
+        "days": 30
+    }
+]
