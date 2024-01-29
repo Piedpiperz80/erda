@@ -89,6 +89,16 @@ public class ErdaTime : MonoBehaviour
         return $"{currentDayName}, Day {currentDayNumber} of {currentMonthName}, {currentSeasonName}, Year {CurrentYear}";
     }
 
+    public string GetSceneDescription()
+    {
+        // Gather details
+        string monthDescription = erdaMonth.GetCurrentMonthDescription();
+        string time = GetCurrentTime();
+
+        // Format the scene description
+        return $"It is {time} {monthDescription}";
+    }
+
     public string GetCurrentTime()
     {
         return $"{hours:D2}:{minutes:D2}:{seconds:D2}";

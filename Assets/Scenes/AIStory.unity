@@ -846,7 +846,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195972930}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5463c90aaddddd14f8467377617a30b3, type: 3}
   m_Name: 
@@ -1217,7 +1217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1569627513}
-  - component: {fileID: 1569627512}
   - component: {fileID: 1569627514}
   m_Layer: 0
   m_Name: WorldTime
@@ -1226,24 +1225,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1569627512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569627511}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322ec3cea74ccf64ab94a5e173be6552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeScale: 1
-  isPaused: 0
-  currentDayName: 
-  currentDay: 0
-  currentMonthName: 
-  currentYear: 0
 --- !u!4 &1569627513
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,6 +1254,7 @@ MonoBehaviour:
   seconds: 0
   minutes: 0
   hours: 0
+  currentYear: 1
   SpeedMultiplier: 1
 --- !u!1 &1631526067
 GameObject:

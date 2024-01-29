@@ -3,19 +3,31 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
 using TMPro;
-
+using System.IO;
+using System;
 
 public class AINarrativeGenerator : MonoBehaviour
 {
     public EnvironmentLoader environmentLoader;
-    private WorldTime worldTime;
+    private ErdaTime erdaTime;
     private string openAiUrl = "https://api.openai.com/v1/engines/gpt-3.5-turbo/completions"; // Ensure this is the correct URL
-    private string apiKey = "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"; // Replace with your actual OpenAI API key
+    private string apiKey;
     public TextMeshProUGUI narrativeText;
 
     void Start()
     {
-        worldTime = GameObject.Find("WorldTime").GetComponent<WorldTime>();
+        string apiKeyFilePath = @"C:\Users\Main\.openai\ApiKey.txt";
+
+        try
+        {
+            apiKey = File.ReadAllText(apiKeyFilePath);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error reading the API key file: " + e.Message);
+        }
+
+        erdaTime = GameObject.Find("WorldTime").GetComponent<ErdaTime>();
 
         if (environmentLoader == null)
         {
@@ -40,6 +52,7 @@ public class AINarrativeGenerator : MonoBehaviour
             webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
             webRequest.SetRequestHeader("Content-Type", "application/json");
+            Debug.Log("API Key: " + apiKey);
             webRequest.SetRequestHeader("Authorization", "Bearer " + apiKey);
 
             yield return webRequest.SendWebRequest();
@@ -62,14 +75,20 @@ public class AINarrativeGenerator : MonoBehaviour
 
     private string PreparePrompt(EnvironmentData environmentData)
     {
+        // Find the ErdaTime instance attached to the GameObject
+        ErdaTime erdaTime = GameObject.Find("WorldTime").GetComponent<ErdaTime>();
 
-        string currentDayInfo = worldTime.GetCurrentDayInfo();
+        // Get the scene description
+        string sceneDescription = erdaTime.GetSceneDescription();
 
-        // Instructing the AI to create a first-person narrative based on the environment data
-        return $"Today is {currentDayInfo}. Create a brief narrative in the first person, describing an environment with {environmentData.environment.vegetation} vegetation," +
-            $" {environmentData.environment.wildlife} wildlife," +
-            $" and situated in a {environmentData.environment.terrain} terrain. Keep it to 2-3 sentences, focusing on the immediate sensory experiences.";
+        // Use the scene description in your narrative prompt
+        return $"The scene is as follows: {sceneDescription}. " +
+               $"Create a brief narrative in the first person, describing an environment with {environmentData.environment.vegetation} vegetation, " +
+               $"{environmentData.environment.wildlife} wildlife, " +
+               $"and situated in a {environmentData.environment.terrain} terrain. " +
+               $"Keep it to 2-3 sentences, focusing on the immediate sensory experiences.";
     }
+
 
 
 

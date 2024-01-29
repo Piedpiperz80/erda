@@ -1,20 +1,8 @@
 {
-  "worldRules": {
-    "technologyLevel": "medieval",
-    "creatures": ["mythical stags", "wandering sprites", "hidden trolls"],
-    "vehicles": ["wooden carts", "riverboats"]
-  },
-  "locations": [
-    {
-      "position": {"x": 0, "y": 0, "z": 0},
-      "environment": {
-        "vegetation": "towering evergreens and scattered broadleaf trees",
-        "wildlife": "stout elks, sly foxes, and occasional wolves",
-        "terrain": "undulating terrain with mossy boulders"
-      },
-      "peoplePresence": "infrequent, mostly solitary travelers or small bands of hunters"
-    }
-  ],
-  "timeOfDay": "dawn",
-  "weather": "a dense mist that slowly lifts"
+  "position": {"x": 0, "y": 0, "z": 0},
+  "environment": {
+    "vegetation": "towering evergreens and scattered broadleaf trees",
+    "wildlife": "stout elks, sly foxes, and occasional wolves",
+    "terrain": "undulating terrain with mossy boulders"
+  }
 }
